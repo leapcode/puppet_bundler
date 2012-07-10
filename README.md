@@ -11,7 +11,7 @@ Installation
 
 1. Copy this directory to your puppet master module path $(git clone https://github.com/evanstachowiak/puppet-bundler bundler)
 2. Apply the `bundler` class to any nodes you want bundler installed on: 
-  class { 'bundler': }
+  class { 'bundler::install': }
 3. Set whatever config variables are necessary: 
    bundler::config { 'linecache19':
     user        => ubuntu,
