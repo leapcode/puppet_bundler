@@ -19,7 +19,7 @@
 #
 class bundler::install (
   $use_rvm      = $bundler::params::use_rvm,
-  $ruby_version = $bundler::params::ruby_version
+  $ruby_version
 ) inherits bundler::params {
 
   if $use_rvm == 'true' {

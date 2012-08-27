@@ -21,7 +21,6 @@ class bundler::params {
       $rvm_bin            = '/usr/local/rvm/bin/rvm'
       $rvm_gem_path       = '/usr/local/rvm/gems'
       $rvm_gemset         = 'global'
-      $ruby_version       = 'ruby-1.9.2-p290'
       $bundler_path       = '/usr/bin'
     }
     default: {
