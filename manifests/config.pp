@@ -21,7 +21,7 @@
 #   [*rvm_gemset*]
 #     RVM gemset to use. Defaults to global.
 #   [*ruby_version*]
-#     Ruby version for RVM purposes. Defaults to ruby-1.9.2-p290
+#     Ruby version for RVM purposes.
 #   [*bundler_path*]
 #     Bundler install directory
 #
@@ -41,7 +41,7 @@ define bundler::config (
   $rvm_bin            = $bundler::params::rvm_bin,
   $rvm_gem_path       = $bundler::params::rvm_gem_path,
   $rvm_gemset         = $bundler::params::rvm_gemset,
-  $ruby_version       = $bundler::params::ruby_version,
+  $ruby_version       = $bundler::ruby_version,
   $bundler_path       = $bundler::params::bundler_path
 ) {
 
