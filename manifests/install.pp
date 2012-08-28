@@ -15,9 +15,10 @@
 # == Requires:
 #
 #   If use_rvm = 'true':
-#   include rvm::system
+#   include rvm
 #
 class bundler::install (
+  $ensure       = 'present',
   $use_rvm      = $bundler::params::use_rvm,
   $ruby_version
 ) inherits bundler::params {
@@ -25,13 +26,13 @@ class bundler::install (
   if $use_rvm == 'true' {
     #Install bundler with correct RVM
     rvm_gem { 'bundler':
-        ensure       => 'present',
+        ensure       => $ensure,
         ruby_version => $ruby_version,
      }
   }
   else {
     package { 'bundler':
-      ensure   => 'present',
+      ensure   => $ensure,
       provider => 'gem',
     }
   }
