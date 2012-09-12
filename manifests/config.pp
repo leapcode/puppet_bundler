@@ -51,23 +51,24 @@ define bundler::config (
     $home_dir = '/root'
   }
   else {
-    $home_dir = "${home_dir_base_path}/$user"
+    $home_dir = "${home_dir_base_path}/${user}"
   }
 
   # Must use $bundler_path_real, otherwise cannot reassign variable error is thrown
   if $use_rvm == 'true' {
     $bundler_path_rvm = "${rvm_gem_path}/${ruby_version}@${rvm_gemset}/bin"
-    $bundler_config_command = "${rvm_bin} ${ruby_version} exec ${bundler_path_rvm}/bundle config build.${name} ${config_flag}"
+    $bundler_bin = "${rvm_bin} ${ruby_version} exec ${bundler_path_rvm}/bundle"
   }
   else {
-    $bundler_config_command = "${bundler_path}/bundle config build.${name} ${config_flag}"
+    $bundler_bin = "${bundler_path}/bundle"
   }
 
+  # Bundler doesn't respect uid. Use /bin/su to override this behavior for users
+  # other than root.
   exec { "bundler_config_${name}":
-    cwd     => $app_dir,
-    command => $bundler_config_command,
-    unless  => "/bin/grep -i \"BUNDLE_BUILD__${name}: ${config_flag}\" ${home_dir}/.bundle/config",
-    user    => $user,
+    cwd       => $app_dir,
+    command   => "/bin/su -c '${bundler_bin} config build.${name} ${config_flag} --gemfile=${app_dir}/Gemfile' ${user}",
+    unless    => "/bin/grep -i \"BUNDLE_BUILD__${name}: ${config_flag}\" ${home_dir}/.bundle/config",
   }
 
 }
