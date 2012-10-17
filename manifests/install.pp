@@ -1,5 +1,5 @@
 # Class bundler::install
-# 
+#
 # Installs bundler Ruby gem manager
 #
 # == Parameters
@@ -18,17 +18,17 @@
 #   include rvm
 #
 class bundler::install (
+  $ruby_version,
   $ensure       = 'present',
   $use_rvm      = $bundler::params::use_rvm,
-  $ruby_version
-) inherits bundler::params {
+  ) inherits bundler::params {
 
-  if $use_rvm == 'true' {
+  if $use_rvm == true {
     #Install bundler with correct RVM
     rvm_gem { 'bundler':
         ensure       => $ensure,
         ruby_version => $ruby_version,
-     }
+    }
   }
   else {
     package { 'bundler':

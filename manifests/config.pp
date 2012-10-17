@@ -1,5 +1,5 @@
 # Define bundler::config
-# 
+#
 # All config settings for candiapp class
 #
 # == Parameters
@@ -11,7 +11,7 @@
 #   [*app_dir*]
 #     App directory where Gemfile is located
 #   [*home_dir_base_path*]
-#     Home directory of the specified user 
+#     Home directory of the specified user
 #   [*use_rvm*]
 #      Sets whether rvm is used. Defaults to true
 #   [*rvm_bin*]
@@ -45,7 +45,7 @@ define bundler::config (
   $bundler_path       = $bundler::params::bundler_path
 ) {
 
-  Class['bundler::install'] -> Bundler::Config["${name}"]
+  Class['bundler::install'] -> Bundler::Config[${name}]
 
   if $user == 'root' {
     $home_dir = '/root'
