@@ -4,7 +4,7 @@ puppet-bundler - Bundler gem manager for Ruby
 This puppet module will install bundler and set config 
 variables.
 
-This module supports Ubuntu 10.04
+This module supports Ubuntu 10.04 and Debian
 
 Installation
 ------------
