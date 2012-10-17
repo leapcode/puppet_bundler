@@ -19,8 +19,9 @@
 #
 class bundler::install (
   $ruby_version,
-  $ensure       = 'present',
-  $use_rvm      = $bundler::params::use_rvm,
+  $ensure          = 'present',
+  $use_rvm         = $bundler::params::use_rvm,
+  $install_method  = $bundler::params::install_method,
   ) inherits bundler::params {
 
   if $use_rvm == true {
@@ -33,7 +34,7 @@ class bundler::install (
   else {
     package { 'bundler':
       ensure   => $ensure,
-      provider => 'gem',
+      provider => $install_method,
     }
   }
 
