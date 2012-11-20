@@ -9,14 +9,22 @@ This module supports Ubuntu 10.04 and Debian
 Installation
 ------------
 
-1. Copy this directory to your puppet master module path $(git clone https://github.com/evanstachowiak/puppet-bundler bundler)
-2. Apply the `bundler` class to any nodes you want bundler installed on: 
+1. Copy this directory to your puppet master module path $(git clone
+https://github.com/evanstachowiak/puppet-bundler bundler)
+
+2. Apply the `bundler` class to any nodes you want bundler installed on:
+
   class { 'bundler::install': }
-   By default this will install bundler as a gem, if you wish to use another method, you can pass any puppet package provider
-   to the class as 'install_method', or use 'undef' if you wish the puppet parser to automatically chose the best method for 
-   your platform. 
-  Examples: class { 'bundler::install': install_method => fink}; 
-            class { 'bundler::install': install_method => undef}
+
+   By default this will install bundler with RVM, if you wish to use another
+   method, you can pass any puppet package provider to the class as
+   'install_method', or just use '' if you wish the puppet parser to
+   automatically chose the best method for your platform.
+
+  Examples: class { 'bundler::install': install_method => 'fink' }; 
+            class { 'bundler::install': install_method => 'gem' }; 
+            class { 'bundler::install': install_method => '' }
+
 3. Set whatever config variables are necessary: 
    bundler::config { 'linecache19':
     user        => ubuntu,

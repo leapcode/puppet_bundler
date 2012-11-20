@@ -18,17 +18,21 @@
 #   include rvm
 #
 class bundler::install (
-  $ruby_version,
+  $ruby_version    = undef,
   $ensure          = 'present',
-  $use_rvm         = $bundler::params::use_rvm,
   $install_method  = $bundler::params::install_method,
   ) inherits bundler::params {
 
-  if $use_rvm == true {
-    #Install bundler with correct RVM
-    rvm_gem { 'bundler':
+  if $install_method == 'rvm' {
+    if $ruby_version == undef {
+      fail('When using rvm, you must pass a ruby_version')
+    }
+    else {
+      #Install bundler with correct RVM
+      rvm_gem { 'bundler':
         ensure       => $ensure,
         ruby_version => $ruby_version,
+      }
     }
   }
   else {
