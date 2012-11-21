@@ -20,10 +20,17 @@
 class bundler::install (
   $ruby_version    = undef,
   $ensure          = 'present',
-  $install_method  = $bundler::params::install_method,
+  $install_method  = 'rvm',
   ) inherits bundler::params {
 
-  if $install_method == 'rvm' {
+  if $install_method == undef {
+    $provider_method = undef
+  }
+  else {
+    $provider_method = $bundler::params::install_method
+  }
+
+  if $provider_method == 'rvm' {
     if $ruby_version == undef {
       fail('When using rvm, you must pass a ruby_version')
     }
@@ -38,7 +45,7 @@ class bundler::install (
   else {
     package { 'bundler':
       ensure   => $ensure,
-      provider => $install_method,
+      provider => $provider_method,
     }
   }
 
