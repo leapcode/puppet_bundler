@@ -18,7 +18,7 @@ https://github.com/evanstachowiak/puppet-bundler bundler)
 
    By default this will install bundler with RVM, if you wish to use another
    method, you can pass any puppet package provider to the class as
-   'install_method', or just use undef if you wish the puppet parser to
+   'install_method', or just use '' if you wish the puppet parser to
    automatically chose the best method for your platform.
 
   Examples: class { 'bundler::install': install_method => 'fink' }; 
