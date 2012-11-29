@@ -29,7 +29,7 @@ class bundler::install (
     warning('$use_rvm is deprecated, please use $install_method instead')
   }
 
-  if $install_method == undef {
+  if ( $install_method == undef ) or ( $install_method == 'package' ) {
     $provider_method = undef
   }
   else {
