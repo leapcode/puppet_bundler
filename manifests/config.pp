@@ -45,7 +45,7 @@ define bundler::config (
   $bundler_path       = $bundler::params::bundler_path
 ) {
 
-  Class['bundler::install'] -> Bundler::Config[${name}]
+  Class['bundler::install'] -> Bundler::Config[$name]
 
   if $user == 'root' {
     $home_dir = '/root'
